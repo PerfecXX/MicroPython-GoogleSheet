@@ -35,19 +35,31 @@ class MicroGoogleSheet():
         )
         response = requests.get(url)
         response.close()
-        return response.status_code
+        return response.status_code    
     
-    def appendRow(self,row="0",data=[]):
+    def appendRow(self,row=0,data=[]):
         sheet_name = self.encoding_url(self.sheetName)
         mode = "appendRow"
         url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&row={}".format(
             self.deploymentID, self.sheetID, sheet_name, mode, row)
         for i in range(len(data)):
-            url += "&data{}={}".format(i+1,self.encoding_url(str(data[i])))
-            
+            url += "&data{}={}".format(i,self.encoding_url(str(data[i])))
+        print(url)
+        response = requests.get(url)
+        response.close()
+        return response.status_code  
     
-    def appendColumn(self,column=1,data=[]):
-        ...
+    def appendColumn(self,column=0,data=[]):
+        sheet_name = self.encoding_url(self.sheetName)
+        mode = "appendColumn"
+        url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&row={}".format(
+            self.deploymentID, self.sheetID, sheet_name, mode, column)
+        for i in range(len(data)):
+            url += "&data{}={}".format(i,self.encoding_url(str(data[i])))
+        print(url)
+        response = requests.get(url)
+        response.close()
+        return response.status_code
     
     def getCell(self, row=1, column=1):
         sheet_name = self.encoding_url(self.sheetName)
@@ -73,29 +85,75 @@ class MicroGoogleSheet():
         
     def gen_scriptFile(self):
         code = """
-        function doGet(e) {
-          var sheet_id = e.parameter.sheet_id;
-          var sheet_name = e.parameter.sheet_name;
+function doGet(e) {
+  var sheet_id = e.parameter.sheet_id;
+  var sheet_name = e.parameter.sheet_name;
+  var mode = e.parameter.mode;
 
-          var ss = SpreadsheetApp.openById(sheet_id);
-          var sheet = ss.getSheetByName(sheet_name);
-          var row = e.parameter.row;
-          var column = e.parameter.column;
-          var data = e.parameter.data;
-          var mode = e.parameter.mode;
+  var ss = SpreadsheetApp.openById(sheet_id);
+  var sheet = ss.getSheetByName(sheet_name);
 
-          var cell = sheet.getRange(row, column);
+  if (mode == "updateCell") {
+    var row = e.parameter.row;
+    var column = e.parameter.column;
+    var data = e.parameter.data;
 
-          if (mode == "post") {
-            cell.setValue(data);
-          } else if (mode == "get") {
-            var value = cell.getValue();
-            var html = "<html><head><title>Get The data </title></head><body><h1>"+value+"</h1></body></html>";
-            return HtmlService.createHtmlOutput(html);
-          }
-        }
+    var cell = sheet.getRange(row, column);
+    cell.setValue(data);
+  }
+  else if (mode == "appendRow") {
+    var data = [];
+    var count = 0;
+    while (e.parameter["data" + count]) {
+      count++;
+    }
+    for (var i = 0; i < count; i++) {
+      var key = "data" + i;
+      var value = e.parameter[key];
+      data.push(value);
+    }
+
+    var lastRow = sheet.getLastRow();
+    var row = e.parameter.row || lastRow + 1; // If row parameter is not provided, append to last row + 1
+    if (row > 0) {
+      sheet.insertRowBefore(row);
+      lastRow = row - 1;
+    }
+    sheet.getRange(lastRow + 1, 1, 1, data.length).setValues([data]);
+  }
+
+  else if (mode == "appendColumn") {
+    var data = [];
+    var count = 0;
+    while (e.parameter["data" + count]) {
+      count++;
+    }
+    for (var i = 0; i < count; i++) {
+      var key = "data" + i;
+      var value = e.parameter[key];
+      data.push([value]); // wrap the value in an array to create a column
+    }
+
+    var lastColumn = sheet.getLastColumn();
+    var column = e.parameter.column || lastColumn + 1; // If column parameter is not provided, append to last colum + 1
+    if (column > 0) {
+      sheet.insertColumnBefore(column);
+      lastColumn = column - 1;
+    }
+    sheet.getRange(1, lastColumn + 1, data.length, 1).setValues(data);
+  }
+
+  else if (mode == "getCell") {
+    var row = e.parameter.row;
+    var column = e.parameter.column;
+
+    var cell = sheet.getRange(row, column);
+    var value = cell.getValue();
+
+    var html = "<html><head><title>Get The data </title></head><body><h1>" + value + "</h1></body></html>";
+    return HtmlService.createHtmlOutput(html);
+  }
+}
         """
         with open('script.txt', 'w') as file:
             file.write(code)
-
-
