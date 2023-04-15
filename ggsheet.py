@@ -27,6 +27,9 @@ class MicroGoogleSheet():
     def set_DeploymentID(self, deployment_id):
         self.deploymentID = deployment_id
         
+    def set_SheetName(self, sheetName):
+        self.sheetName = sheetName
+        
     def updateCell(self, row=1, column=1, data=""):
         sheet_name = self.encoding_url(self.sheetName)
         mode = "updateCell"
@@ -35,7 +38,19 @@ class MicroGoogleSheet():
         )
         response = requests.get(url)
         response.close()
-        return response.status_code    
+        return response.status_code
+    
+    def updateRow(self,row=1,data=[]):
+        sheet_name = self.encoding_url(self.sheetName)
+        mode = "updateRow"
+        url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&row={}".format(
+            self.deploymentID, self.sheetID, sheet_name, mode, row)
+        for i in range(len(data)):
+            url += "&data{}={}".format(i,self.encoding_url(str(data[i])))
+        print(url)
+        response = requests.get(url)
+        response.close()
+        return response.status_code
     
     def appendRow(self,row=0,data=[]):
         sheet_name = self.encoding_url(self.sheetName)
@@ -49,10 +64,22 @@ class MicroGoogleSheet():
         response.close()
         return response.status_code  
     
-    def appendColumn(self,column=0,data=[]):
+    def appendColumn(self,column=1,data=[]):
         sheet_name = self.encoding_url(self.sheetName)
         mode = "appendColumn"
-        url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&row={}".format(
+        url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&column={}".format(
+            self.deploymentID, self.sheetID, sheet_name, mode, column)
+        for i in range(len(data)):
+            url += "&data{}={}".format(i,self.encoding_url(str(data[i])))
+        print(url)
+        response = requests.get(url)
+        response.close()
+        return response.status_code
+    
+    def updateColumn(self,column=1,data=[]):
+        sheet_name = self.encoding_url(self.sheetName)
+        mode = "updateColumn"
+        url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&column={}".format(
             self.deploymentID, self.sheetID, sheet_name, mode, column)
         for i in range(len(data)):
             url += "&data{}={}".format(i,self.encoding_url(str(data[i])))
@@ -70,6 +97,46 @@ class MicroGoogleSheet():
         response = requests.get(url)
         responseCode = response.status_code
         
+        if responseCode > 0:
+            html_code = response.text
+            start_index = html_code.find('<body>')
+            end_index = html_code.find('</body>')
+            script_content = html_code[start_index:end_index]
+            start_index = script_content.find('script type="text/javascript"')
+            end_index = script_content.find('</script>')
+            script_content = script_content[start_index:end_index]
+            script_content = script_content[script_content.find('body')+18:script_content.find('/body')-21]
+            return script_content
+        else:
+            return "Error Code:{}".format(responseCode)
+        
+    def getRow(self,row=1):
+        sheet_name = self.encoding_url(self.sheetName)
+        mode = "getRow"
+        url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&row={}".format(
+            self.deploymentID, self.sheetID, sheet_name, mode, row)
+        response = requests.get(url)
+        responseCode = response.status_code
+        if responseCode > 0:
+            html_code = response.text
+            start_index = html_code.find('<body>')
+            end_index = html_code.find('</body>')
+            script_content = html_code[start_index:end_index]
+            start_index = script_content.find('script type="text/javascript"')
+            end_index = script_content.find('</script>')
+            script_content = script_content[start_index:end_index]
+            script_content = script_content[script_content.find('body')+18:script_content.find('/body')-21]
+            return script_content
+        else:
+            return "Error Code:{}".format(responseCode)
+    
+    def getColumn(self,column=1):
+        sheet_name = self.encoding_url(self.sheetName)
+        mode = "getColumn"
+        url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&column={}".format(
+            self.deploymentID, self.sheetID, sheet_name, mode, column)
+        response = requests.get(url)
+        responseCode = response.status_code
         if responseCode > 0:
             html_code = response.text
             start_index = html_code.find('<body>')
@@ -157,3 +224,4 @@ function doGet(e) {
         """
         with open('script.txt', 'w') as file:
             file.write(code)
+
