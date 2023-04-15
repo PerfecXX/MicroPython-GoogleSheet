@@ -14,6 +14,22 @@ function doGet(e) {
     var cell = sheet.getRange(row, column);
     cell.setValue(data);
   }
+  else if (mode == "updateRow") {
+    var row = e.parameter.row;
+    var data = [];
+    var count = 0;
+    while (e.parameter["data" + count]) {
+      count++;
+    }
+    for (var i = 0; i < count; i++) {
+      var key = "data" + i;
+      var value = e.parameter[key];
+      data.push(value);
+    }
+    var range = sheet.getRange(row, 1, 1, data.length);
+    range.setValues([data]);
+  }
+
   else if (mode == "appendRow") {
     var data = [];
     var count = 0;
@@ -54,6 +70,21 @@ function doGet(e) {
       lastColumn = column - 1;
     }
     sheet.getRange(1, lastColumn + 1, data.length, 1).setValues(data);
+  }
+  else if (mode == "updateColumn") {
+    var column = e.parameter.column;
+    var data = [];
+    var count = 0;
+    while (e.parameter["data" + count]) {
+      count++;
+    }
+    for (var i = 0; i < count; i++) {
+      var key = "data" + i;
+      var value = e.parameter[key];
+      data.push([value]); // wrap the value in an array to create a column
+    }
+    var range = sheet.getRange(1, column, data.length, 1);
+    range.setValues(data);
   }
 
   else if (mode == "getCell") {
