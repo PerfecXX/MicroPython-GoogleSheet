@@ -97,4 +97,31 @@ function doGet(e) {
     var html = "<html><head><title>Get The data </title></head><body><h1>" + value + "</h1></body></html>";
     return HtmlService.createHtmlOutput(html);
   }
+  else if (mode == "getRow") {
+  var row = e.parameter.row;
+  var range = sheet.getRange(row, 1, 1, sheet.getLastColumn());
+  var values = range.getValues()[0];
+
+  var heading = "";
+  for (var i = 0; i < values.length; i++) {
+    heading += values[i] + " ";
+  }
+
+  var html = "<html><head><title>Get Row Data</title></head><body><h1>" + heading + "</h1></body></html>";
+  return HtmlService.createHtmlOutput(html);
+}
+else if (mode == "getColumn") {
+  var column = e.parameter.column;
+  var range = sheet.getRange(1, column, sheet.getLastRow(), 1);
+  var values = range.getValues();
+  var heading = "";
+  for (var i = 0; i < values.length; i++) {
+    heading += values[i] + " ";
+  }
+
+  var html = "<html><head><title>Get Row Data</title></head><body><h1>" + heading + "</h1></body></html>";
+  return HtmlService.createHtmlOutput(html);
+  
+}
+
 }
