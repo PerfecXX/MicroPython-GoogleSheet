@@ -51,16 +51,4 @@ print(ggsheet.getRow(1))
 # Getting Started
 - [Installation](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/installation.md)
 - [How to get your google credential](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/get_google_credential.md)
-
-# Usage
-- Create Instance
-- Set Deployment ID 
-- Set Sheet Name 
-- Update Cell
-- Update Row
-- Update Column
-- Append Row
-- Append Column
-- Get Cell
-- Get Row
-- Get Column
+- [Example]()
