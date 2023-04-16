@@ -50,7 +50,7 @@ print(ggsheet.getRow(1))
 
 # Getting Started
 - Installation
-- How to use
+- How to get your credential
 
 # Usage
 - Update Cell
