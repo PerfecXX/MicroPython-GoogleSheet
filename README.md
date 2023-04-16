@@ -49,7 +49,7 @@ print(ggsheet.getRow(1))
 ```
 
 # Getting Started
-- Installation
+- [Installation](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/installation.md)
 - [How to get your google credential](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/get_google_credential.md)
 
 # Usage
