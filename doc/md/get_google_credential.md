@@ -10,7 +10,7 @@
 
 # How to get the Google Apps Script Deployment ID
 1. At the `Extensions` menu, select the `Apps Script`, and then the new Google Apps Script should be created.
-2. In the Google Apps Script window, copy all of the script from `script.gs` and paste them into Google Apps Script.
+2. In the Google Apps Script window, copy all of the script from [`script.gs`](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/script.gs) and paste them into Google Apps Script.
 3. Save the script.
 4. Click the `Deploy` button, then select `New Deployment`. After that, the new deployment window should appear. 
 5. On the select type menu on the left-side of the window, select `Web app`. 
