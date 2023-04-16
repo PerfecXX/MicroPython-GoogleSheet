@@ -53,6 +53,9 @@ print(ggsheet.getRow(1))
 - [How to get your google credential](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/get_google_credential.md)
 
 # Usage
+- Create Instance
+- Set Deployment ID 
+- Set Sheet Name 
 - Update Cell
 - Update Row
 - Update Column
