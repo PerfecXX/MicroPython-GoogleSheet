@@ -50,7 +50,7 @@ print(ggsheet.getRow(1))
 
 # Getting Started
 - Installation
-- How to get your credential
+- [How to get your google credential](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/get_google_credential.md)
 
 # Usage
 - Update Cell
