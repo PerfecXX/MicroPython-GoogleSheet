@@ -1,6 +1,6 @@
 # Prerequisite
-1. In this documentation, we use the Thonny IDE. If you have not installed the Thonny IDE, click here: https://thonny.org/ .
-2. ESP32/ESP8266 that already installed the MicroPython firmware and connected to your device.
+1. In this documentation, we use the Thonny IDE. If you have not installed the Thonny IDE, click [here](https://github.com/PerfecXX/MicroPython-ESP32-AIoT-DevBoard-V1/blob/9f2c6fd7d80213c013d1d448a461d4a4ce00fc06/doc/md/setup-thonny.md)
+2. ESP32/ESP8266 that already installed the MicroPython firmware and connected to your device. if you not sure how to do, click [here](https://github.com/PerfecXX/MicroPython-ESP32-AIoT-DevBoard-V1/blob/9f2c6fd7d80213c013d1d448a461d4a4ce00fc06/doc/md/setup-esp32.md)
 
 # Installation 
 1. Click on the `Tools` menu,then select `Manage Packages`, and the packages manager window should appear.
