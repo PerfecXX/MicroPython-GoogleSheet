@@ -123,5 +123,22 @@ else if (mode == "getColumn") {
   return HtmlService.createHtmlOutput(html);
   
 }
+else if (mode == "deleteRow") {
+  var row = e.parameter.row;
+  sheet.deleteRow(row);
+}
+
+else if (mode == "deleteColumn") {
+  var column = e.parameter.column;
+  sheet.deleteColumn(column);
+}
+
+else if (mode == "deleteCell") {
+  var row = e.parameter.row;
+  var column = e.parameter.column;
+  var cell = sheet.getRange(row, column);
+  cell.clearContent();
+}
+
 
 }
