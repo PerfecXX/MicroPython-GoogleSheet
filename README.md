@@ -3,6 +3,10 @@ Update or append the data to Google Sheet, or get the data on Google Sheet.
 By using HTTP to execute the Google Apps Script API.  
 Compatible with ESP32 and ESP8266.
 
+# Getting Started
+- [Installation](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/installation.md)
+- [How to get your google credential](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/get_google_credential.md)
+
 # Quick Example 
 ```python
 # Import Library 
@@ -10,17 +14,17 @@ from ggsheet import MicroGoogleSheet
 from network import WLAN,STA_IF
 
 # Network Creadential 
-ssid = "Change SSID"    
-password = "Change Password"
+ssid = "Change_SSID"    
+password = "Change_Password"
 
 # Connect to Network
 sta_if = WLAN(STA_IF)
 sta_if.active(True)
 if not sta_if.isconnected():
-    print("Connecting to wifi: ", ssid)
-    sta_if.connect(ssid, password)
-    while not sta_if.isconnected():
-        pass
+   print("Connecting to wifi: ", ssid)
+   sta_if.connect(ssid, password)
+   while not sta_if.isconnected():
+       pass
 print("Connection successful")
 
 # Google Sheet Credential 
@@ -35,20 +39,36 @@ ggsheet.set_DeploymentID(google_app_deployment_id)
 # create the Google App Script file (not necessary if it already exists).
 ggsheet.gen_scriptFile()
 
-# Update the cell (single data into a single cell)
+# Update the data to a specific cell (Row,Column,Data)
 ggsheet.updateCell(1,1,"Hello this is my first data")
 
-# Get the data from specific cell 
+# Get the data from a specific cell (Row,Column)
 print(ggsheet.getCell(1,1))
 
-# Append the row (many data into a single row)
-ggsheet.updateRow(1,[1,2,3,"Hello","สวัสดีครับ"])
+# Delete the data from a specific cell (Row,Column)
+ggsheet.deleteCell(1,1)
 
-# Get all the data from a specific row
-print(ggsheet.getRow(1))
+# Append the data to a specific row (Row, Data List)
+ggsheet.appendRow(1,[1,2,3,"Row 1 Appended!"])
+
+# Update the data in a specific row (Row, Data List) 
+ggsheet.updateRow(1,[3,2,1,"Row 1 Updated!"])
+
+# Get all of the data from a specific row (Row)
+ggsheet.getRow(1)
+
+# Delete the data in a specific row (Row)
+ggsheet.deleteRow(1)
+
+# Append the data to a specific column (Column, Data List)
+ggsheet.appendColumn(1,[1,2,3,"Column 1 Appended!"])
+
+# Update the data to a specific column (Column, Data List)
+ggsheet.updateColumn(1,[3,2,1,"Column 1 Updated!"])
+
+# Get all of the data from a specific column (Column)
+ggsheet.getColumn(1)
+
+# Delete the data in a specific column (Column)
+ggsheet.deleteColumn(1) 
 ```
-
-# Getting Started
-- [Installation](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/installation.md)
-- [How to get your google credential](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/get_google_credential.md)
-- [Example]()
