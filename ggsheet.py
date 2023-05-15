@@ -3,7 +3,7 @@ import urequests as requests
 import ujson
 import os
 
-__version__ = '0.0.1'
+__version__ = '0.0.2'
 __author__ = 'Teeraphat Kullanankanjana'
 
 class MicroGoogleSheet():
@@ -153,6 +153,33 @@ class MicroGoogleSheet():
             return script_content
         else:
             return "Error Code:{}".format(responseCode)
+    
+    def deleteCell(self,row=1,column=1):
+        sheet_name = self.encoding_url(self.sheetName)
+        mode = "deleteCell"
+        url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&row={}&column={}".format(
+            self.deploymentID, self.sheetID, sheet_name, mode, row, column)
+        response = requests.get(url)
+        response.close()
+        return response.status_code
+    
+    def deleteRow(self,row=1):
+        sheet_name = self.encoding_url(self.sheetName)
+        mode = "deleteRow"
+        url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&row={}".format(
+            self.deploymentID, self.sheetID, sheet_name, mode, row)
+        response = requests.get(url)
+        response.close()
+        return response.status_code
+    
+    def deleteColumn(self,column=1):
+        sheet_name = self.encoding_url(self.sheetName)
+        mode = "deleteColumn"
+        url = "https://script.google.com/macros/s/{}/exec?sheet_id={}&sheet_name={}&mode={}&column={}".format(
+            self.deploymentID, self.sheetID, sheet_name, mode, column)
+        response = requests.get(url)
+        response.close()
+        return response.status_code
 
     def gen_scriptFile(self):
         code = """
@@ -281,10 +308,23 @@ else if (mode == "getColumn") {
   return HtmlService.createHtmlOutput(html);
   
 }
-
+else if (mode == "deleteRow") {
+  var row = e.parameter.row;
+  sheet.deleteRow(row);
 }
 
+else if (mode == "deleteColumn") {
+  var column = e.parameter.column;
+  sheet.deleteColumn(column);
+}
+
+else if (mode == "deleteCell") {
+  var row = e.parameter.row;
+  var column = e.parameter.column;
+  var cell = sheet.getRange(row, column);
+  cell.clearContent();
+}
+}
         """
         with open('script.txt', 'w') as file:
             file.write(code)
-
