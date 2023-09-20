@@ -1,4 +1,8 @@
 # MicroPython-GoogleSheet
+
+[![Version](https://img.shields.io/badge/version-0.0.2-blue.svg)](https://github.com/yourusername/netpie-python-library)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 Update or append the data to Google Sheet, or get the data on Google Sheet.  
 By using HTTP to execute the Google Apps Script API.  
 Compatible with ESP32 and ESP8266.
