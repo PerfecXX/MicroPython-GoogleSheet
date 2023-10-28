@@ -10,6 +10,7 @@ Compatible with ESP32 and ESP8266.
 # Getting Started
 - [Installation](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/installation.md)
 - [How to get your google credential](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/get_google_credential.md)
+- [API](https://github.com/PerfecXX/MicroPython-GoogleSheet/wiki)
 
 # Quick Example 
 ```python
