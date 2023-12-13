@@ -1,6 +1,6 @@
 /* 
 Author: Teeraphat Kullanankanjana
-Version: 0.0.2
+Version: 0.0.3
 */
 
 function doGet(e) {
@@ -108,7 +108,7 @@ function doGet(e) {
     var cell = sheet.getRange(row, column);
     var value = cell.getValue();
 
-    var html = "<html><head><title>Get The data </title></head><body><h1>" + value + "</h1></body></html>";
+    var html = "<html><head><title>Get The data </title></head><body><h1>start</h1><h1>" + value + "</h1><h1>finish</h1></body></html>";
     return HtmlService.createHtmlOutput(html);
   }
   
@@ -123,7 +123,7 @@ function doGet(e) {
     heading += values[i] + " ";
   }
 
-  var html = "<html><head><title>Get Row Data</title></head><body><h1>" + heading + "</h1></body></html>";
+  var html = "<html><head><title>Get Row Data</title></head><body><h1>start</h1><h1>" + heading + "</h1><h1>finish</h1></body></html>";
   return HtmlService.createHtmlOutput(html);
 }
  
@@ -137,7 +137,7 @@ else if (mode == "getColumn") {
     heading += values[i] + " ";
   }
 
-  var html = "<html><head><title>Get Row Data</title></head><body><h1>" + heading + "</h1></body></html>";
+  var html = "<html><head><title>Get Column Data</title></head><body><h1>start</h1><h1>" + heading + "</h1><h1>finish</h1></body></html>";
   return HtmlService.createHtmlOutput(html);
   
 }
