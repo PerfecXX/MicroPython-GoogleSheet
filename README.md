@@ -60,7 +60,7 @@ ggsheet.appendRow(1,[1,2,3,"Row 1 Appended!"])
 ggsheet.updateRow(1,[3,2,1,"Row 1 Updated!"])
 
 # Get all of the data from a specific row (Row)
-ggsheet.getRow(1)
+print(ggsheet.getRow(1))
 
 # Delete the data in a specific row (Row)
 ggsheet.deleteRow(1)
@@ -72,7 +72,7 @@ ggsheet.appendColumn(1,[1,2,3,"Column 1 Appended!"])
 ggsheet.updateColumn(1,[3,2,1,"Column 1 Updated!"])
 
 # Get all of the data from a specific column (Column)
-ggsheet.getColumn(1)
+print(ggsheet.getColumn(1))
 
 # Delete the data in a specific column (Column)
 ggsheet.deleteColumn(1) 
