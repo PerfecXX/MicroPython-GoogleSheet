@@ -1,6 +1,6 @@
 /* 
 Author: Teeraphat Kullanankanjana
-Version: 0.0.3
+Version: 0.0.4
 */
 
 function doGet(e) {
@@ -120,7 +120,7 @@ function doGet(e) {
 
   var heading = "";
   for (var i = 0; i < values.length; i++) {
-    heading += values[i] + " ";
+    heading += values[i] + ",";
   }
 
   var html = "<html><head><title>Get Row Data</title></head><body><h1>start</h1><h1>" + heading + "</h1><h1>finish</h1></body></html>";
@@ -134,7 +134,7 @@ else if (mode == "getColumn") {
   var values = range.getValues();
   var heading = "";
   for (var i = 0; i < values.length; i++) {
-    heading += values[i] + " ";
+    heading += values[i] + ",";
   }
 
   var html = "<html><head><title>Get Column Data</title></head><body><h1>start</h1><h1>" + heading + "</h1><h1>finish</h1></body></html>";
