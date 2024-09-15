@@ -15,7 +15,7 @@ DESCRIPTION = '\n\n'.join(LOAD_TEXT(_) for _ in [
 setup(
     name='micropython-googlesheet',
     py_modules=['ggsheet'],
-    version='0.0.2',
+    version='0.0.5',
     description='Update or append the data to Google Sheet, or get the data on Google Sheet. by using HTTP to execute the Google Apps Script API compatible with ESP32 and ESP8266.',
     long_description=DESCRIPTION,
     keywords= ['googlesheet', 'esp32', 'esp8266' ,'micropython'],
