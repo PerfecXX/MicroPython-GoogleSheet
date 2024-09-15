@@ -41,9 +41,6 @@ google_app_deployment_id = "xxxxxxxx"
 ggsheet = MicroGoogleSheet(google_sheet_url,google_sheet_name)
 ggsheet.set_DeploymentID(google_app_deployment_id)
 
-# create the Google App Script file (not necessary if it already exists).
-ggsheet.gen_scriptFile()
-
 # Update the data to a specific cell (Row,Column,Data)
 ggsheet.updateCell(1,1,"Hello this is my first data")
 
