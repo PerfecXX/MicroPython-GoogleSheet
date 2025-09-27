@@ -1,4 +1,4 @@
-# MicroPython-GoogleSheet
+# MicroPython GoogleSheet
 
 [![Version](https://img.shields.io/badge/version-0.0.5-blue.svg)](https://github.com/PerfecXX/MicroPython-GoogleSheet)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -6,6 +6,10 @@
 Update or append the data to Google Sheet, or get the data on Google Sheet.  
 By using HTTP to execute the Google Apps Script API.  
 Compatible with ESP32.
+
+# News
+Version 1.0.0 is currently in the testing and deployment phase.
+The official release tag will be announced as soon as final testing and deployment are complete.
 
 # Getting Started
 - [Installation](https://github.com/PerfecXX/MicroPython-GoogleSheet/blob/main/doc/md/installation.md)
